@@ -3,6 +3,7 @@
     "version": "0.0.5",
     "description": "",
     "main": "index.js",
+    "types": "dist",
     "publishConfig": {
         "access": "public"
     },
