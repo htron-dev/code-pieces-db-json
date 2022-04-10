@@ -1,0 +1,24 @@
+{
+    "name": "@code-piece/db-json",
+    "version": "0.0.1",
+    "description": "",
+    "main": "index.js",
+    "exports": {
+        ".": {
+            "import": "./dist/index.es.js",
+            "require": "./dist/index.umd.js"
+        }
+    },
+    "scripts": {
+        "build": "vite build",
+        "test": "vitest"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "^17.0.23",
+        "vite": "^2.9.1",
+        "vitest": "^0.9.3"
+    }
+}
