@@ -60,4 +60,10 @@ export class Query {
         this.filters.push([field, value]);
         return this;
     }
+
+    public findBy(field: string, value: any) {
+        const result = this.value<any[]>().find((row) => row[field] === value);
+
+        return result || null;
+    }
 }
