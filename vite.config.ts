@@ -2,8 +2,17 @@
 
 import path from "path";
 import { defineConfig } from "vite";
+import typescript from "@rollup/plugin-typescript";
 
 export default defineConfig({
+    plugins: [
+        typescript({
+            declaration: true,
+            rootDir: path.resolve(__dirname, "src"),
+            declarationDir: path.resolve(__dirname, "dist"),
+            exclude: ["*.spec.ts"],
+        }),
+    ],
     resolve: {
         alias: [
             { find: "@/test", replacement: path.resolve(__dirname, "test") },

@@ -1,3 +1,1 @@
-export function Hello() {
-    console.log("Hello World");
-}
+export * from "./query";
