@@ -5,7 +5,10 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
     resolve: {
-        alias: [{ find: "@", replacement: path.resolve(__dirname, "src") }],
+        alias: [
+            { find: "@/test", replacement: path.resolve(__dirname, "test") },
+            { find: "@", replacement: path.resolve(__dirname, "src") },
+        ],
     },
     build: {
         lib: {
