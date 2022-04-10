@@ -1,8 +1,11 @@
 {
-    "name": "@code-piece/db-json",
+    "name": "@code-pieces/db-json",
     "version": "0.0.1",
     "description": "",
     "main": "index.js",
+    "publishConfig": {
+        "access": "public"
+    },
     "exports": {
         ".": {
             "import": "./dist/index.es.js",
