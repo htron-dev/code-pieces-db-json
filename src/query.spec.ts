@@ -64,13 +64,30 @@ it("should findBy() return one item by name", () => {
     expect(result).toEqual({ id: 2, name: "bar", age: 18 });
 });
 
-it("should findBy() return null if item do not exist", () => {
+it("should findBy() return null if item do not exist", async () => {
     const filename = createFakeJson([
         { id: 1, name: "foo", age: 18 },
         { id: 2, name: "bar", age: 18 },
     ]);
 
-    const result = Query.from(filename).findBy("name", "baz");
+    const result = await Query.from(filename).findBy("name", "baz");
 
     expect(result).toBeNull();
+});
+
+it("should query be able to be updated before the promise resolve", async () => {
+    const filename = createFakeJson([
+        { id: 1, name: "foo", age: 18 },
+        { id: 2, name: "bar", age: 18 },
+    ]);
+
+    const query = Query.from(filename);
+
+    query.select("name");
+
+    query.where("name", "bar");
+
+    const result = await query;
+
+    expect(result).toEqual([{ name: "bar" }]);
 });
