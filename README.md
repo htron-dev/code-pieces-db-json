@@ -13,13 +13,13 @@ We try to follow the same syntax as **Knexjs** project, so you will have a very 
 ## Installation
 
 ```shell
-npm i @code-piece/db-json@latest
+npm i @code-pieces/db-json@latest
 ```
 
 ## Simple Usage
 
 ```js
-import { Query } from "@code-piece/db-json";
+import { Query } from "@code-pieces/db-json";
 
 Query.from("./users.json").then((users) => {
     console.log("all-users", users);
@@ -37,7 +37,7 @@ console.log("all-users", users);
 ## Update the query before it's resolved
 
 ```js
-import { Query } from "@code-piece/db-json";
+import { Query } from "@code-pieces/db-json";
 
 const query = Query.from("./users.json");
 
