@@ -11,7 +11,7 @@ export function createFakeJson(data: any) {
     return filename;
 }
 
-export function removeFakeJson() {
+export async function removeFakeJson() {
     const filename = path.resolve(__dirname, "..", "..", "tmp");
 
     if (fs.existsSync(filename)) {
