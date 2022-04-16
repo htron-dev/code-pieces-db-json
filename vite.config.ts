@@ -7,6 +7,7 @@ import typescript from "@rollup/plugin-typescript";
 export default defineConfig({
     plugins: [
         typescript({
+            target: "esnext",
             declaration: true,
             rootDir: path.resolve(__dirname, "src"),
             declarationDir: path.resolve(__dirname, "dist"),
@@ -20,6 +21,7 @@ export default defineConfig({
         ],
     },
     build: {
+        target: "node12",
         lib: {
             entry: path.resolve(__dirname, "src", "index.ts"),
             name: "@code-piece/db-json",
@@ -27,7 +29,7 @@ export default defineConfig({
             formats: ["es", "umd"],
         },
         rollupOptions: {
-            external: ["vue"],
+            external: ["fs"],
         },
     },
     test: {
