@@ -108,3 +108,19 @@ it("should add a new item to the array", async () => {
         { id: 3, name: "baz", age: 18 },
     ]);
 });
+
+it("should update an item in the array", async () => {
+    const filename = createFakeJson([
+        { id: 1, name: "foo", age: 18 },
+        { id: 2, name: "bar", age: 18 },
+    ]);
+
+    await Query.from(filename).where("id", 2).update({ name: "baz" });
+
+    const result = await Query.from(filename);
+
+    expect(result).toEqual([
+        { id: 1, name: "foo", age: 18 },
+        { id: 2, name: "baz", age: 18 },
+    ]);
+});
