@@ -1,6 +1,7 @@
 import fs from "fs";
 
 export class Query<T> extends Promise<T> {
+    public _filename: string;
     public _result = [];
 
     private _queryResolve: Function;
@@ -37,6 +38,7 @@ export class Query<T> extends Promise<T> {
         const data = fs.readFileSync(filename, "utf8");
 
         query._result = JSON.parse(data);
+        query._filename = filename;
 
         return query as Query<any>;
     }
@@ -62,6 +64,17 @@ export class Query<T> extends Promise<T> {
 
         return result || null;
     }
-}
 
-// hello().then((value) => console.log(value));
+    public async insert(data: any) {
+        const all = await Query.from(this._filename);
+
+        all.push(data);
+
+        await fs.promises.writeFile(
+            this._filename,
+            JSON.stringify(all, null, 2)
+        );
+
+        return Promise.resolve(data);
+    }
+}

@@ -91,3 +91,20 @@ it("should query be able to be updated before the promise resolve", async () => 
 
     expect(result).toEqual([{ name: "bar" }]);
 });
+
+it("should add a new item to the array", async () => {
+    const filename = createFakeJson([
+        { id: 1, name: "foo", age: 18 },
+        { id: 2, name: "bar", age: 18 },
+    ]);
+
+    await Query.from(filename).insert({ id: 3, name: "baz", age: 18 });
+
+    const result = await Query.from(filename);
+
+    expect(result).toEqual([
+        { id: 1, name: "foo", age: 18 },
+        { id: 2, name: "bar", age: 18 },
+        { id: 3, name: "baz", age: 18 },
+    ]);
+});
