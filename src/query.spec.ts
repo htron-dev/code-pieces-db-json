@@ -124,3 +124,16 @@ it("should update an item in the array", async () => {
         { id: 2, name: "baz", age: 18 },
     ]);
 });
+
+it("should delete an item from array", async () => {
+    const filename = createFakeJson([
+        { id: 1, name: "foo", age: 18 },
+        { id: 2, name: "bar", age: 18 },
+    ]);
+
+    await Query.from(filename).where("id", 2).delete();
+
+    const result = await Query.from(filename);
+
+    expect(result).toEqual([{ id: 1, name: "foo", age: 18 }]);
+});

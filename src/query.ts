@@ -88,11 +88,13 @@ export class Query<T = any[]> extends Promise<T> {
             JSON.stringify(all, null, 2)
         );
 
-        return Promise.resolve(data);
+        return this._queryResolve(data);
     }
 
     public async update(data: any) {
         const all = await Query.from(this._filename);
+
+        let count = 0;
 
         const result = all.map((item) => {
             const match = this._whereStatement.every(
@@ -100,6 +102,7 @@ export class Query<T = any[]> extends Promise<T> {
             );
 
             if (match) {
+                count++;
                 return { ...item, ...data };
             }
 
@@ -111,6 +114,25 @@ export class Query<T = any[]> extends Promise<T> {
             JSON.stringify(result, null, 2)
         );
 
-        return Promise.resolve(data);
+        return this._queryResolve({ count });
+    }
+
+    public async delete() {
+        const all = await Query.from(this._filename);
+
+        const result = all.filter((item) =>
+            this._whereStatement.every(
+                ([field, value]) => item[field] !== value
+            )
+        );
+
+        const count = all.length - result.length;
+
+        await fs.promises.writeFile(
+            this._filename,
+            JSON.stringify(result, null, 2)
+        );
+
+        return this._queryResolve({ count });
     }
 }
