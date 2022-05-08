@@ -63,12 +63,38 @@ const result = await Query.from("./users.json").where("name", "Jonathan");
 Return the first founded object or **null** if no one was founded
 
 ```js
-const result = await Query.from(filename).findBy("name", "Jonathan");
+const result = await Query.from("./users.json").findBy("name", "Jonathan");
 
 // output : { id: 1, name: "Jonathan" }
 ```
 
-## Notes & Recomendations
+## Insert method
+
+Create a new item
+
+```js
+await Query.from("./users.json").insert({ id: 3, name: "Dio" });
+```
+
+## Update method
+
+Update the items in the database, can be combined with where()
+
+```js
+await Query.from("./users.json")
+    .where("name", "Jonathan")
+    .update({ name: "Dio" });
+```
+
+## Delete method
+
+Delete the items in the database, can be combined with where()
+
+```js
+await Query.from("./users.json").where("name", "Jonathan").delete();
+```
+
+## Notes & Recommendations
 
 -   This is very useful to make config files that uses json format.
--   This lib is not recommended to deal with a huge amount of data like in big data projects because the database is read and manipulated in runtime.
+-   This lib is not recommended to deal with a huge amount of data because the database is read and manipulated in runtime.
